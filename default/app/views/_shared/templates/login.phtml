@@ -1,0 +1,26 @@
+<?php header('HTTP/1.1 401 Unauthorized') ?>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Login</title>
+<?php echo Tag::css('admin/style'); ?>
+<?php echo Html::includeCss();?>
+</head>
+<body>
+
+<div id="login">
+<?php echo Form::open(); ?>
+<?php if(isset($msg)):?>
+	<div class="error"><?php echo $msg;?></div>
+<?php endif;?>
+<?php echo Form::label("Usuario","user"); ?>
+<?php echo Form::text("user"); ?>
+<?php echo Form::label("Password","password"); ?>
+<?php echo Form::pass("password"); ?>
+<div class="center">
+	<?php echo Form::submit(__('Submit'), 'class="btn"'); ?>
+</div>
+<?php echo Form::close(); ?>
+</div>
+</body>
+</html>

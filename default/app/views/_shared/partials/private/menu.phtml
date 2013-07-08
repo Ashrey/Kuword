@@ -1,0 +1,19 @@
+<?php
+$a_menu = Load::model('links')->getDashboardBar();
+?>
+<nav class="navbar ">
+	 <div class="navbar-inner">
+		<?php echo  Html::link('',$title, 'class="brand"');?>
+		<ul class="nav">
+		<?php foreach($a_menu as $o_item):
+			$meta = json_decode($o_item->metadata);
+			$icon = isset($meta->icon)?"<i class=\"icon-{$meta->icon} icon-2x\"></i> ":'';
+		?>
+			<li><?php echo Html::link($o_item->href, "$icon {$o_item->showed_text}" ,
+					array('title'=> $o_item->title)
+				);?></li>
+		<?php endforeach;?>
+		</ul>
+	</div>
+</nav>
+

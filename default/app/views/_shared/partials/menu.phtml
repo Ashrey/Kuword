@@ -1,0 +1,6 @@
+<ul id="menu">
+<?php foreach($menu as $o_menu):?>
+	<?php $a_item = isset($o_menu->param)?get_object_vars($o_menu->param):array();?>
+	<li><?php echo Html::link($o_menu->href, $o_menu->showed_text, $a_item) ?></li>
+<?php endforeach?>
+</ul>

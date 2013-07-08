@@ -1,0 +1,7 @@
+<h3><?php echo __('Tags');?></h3>
+<ul>
+<?php foreach($tpl_tags as $o_tag):?>
+	<?php $s_text = "$o_tag->tag_name ($o_tag->total)";	 ?>
+	<li><?php echo HTag::link_to('tag/'.urlencode($o_tag->tag_name), $s_text)?></li>
+<?php endforeach?>
+</ul>

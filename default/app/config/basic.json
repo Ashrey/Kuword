@@ -1,0 +1,27 @@
+{
+	"style":"simple",
+	"title":"KuWord",
+	"desc":"World on words",
+	"charset":"UTF-8",
+	"lang":"es",
+	"per_page": 10,
+	"locale":[
+		"es_ES.utf8",
+		"es_ES",
+		"esp"
+	],
+	"timezone":"America\/Caracas",
+	"dateformat":"%T %d\/%m\/%Y ",
+	"extallow":[
+		"gif",
+		"png",
+		"jpg",
+		"zip",
+		"mp3"
+	],
+	"addon":[
+		"more",
+		"socialbar",
+		"link"
+	]
+}

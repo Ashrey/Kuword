@@ -1,0 +1,7 @@
+<ul class="nav nav-tabs nav-stacked">
+<?php foreach($page->items as $i):?>
+	<li><?php echo Html::link(
+		"index/post/$i->strid", "{$i->title} <br /> <i class='icon-time'></i>{$i->modified_in}")?></li>
+<?php endforeach?>
+</ul>
+
