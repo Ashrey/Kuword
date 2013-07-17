@@ -1,19 +1,11 @@
-<div class="content">
-	<div id="posts" class="row-fluid">
-		<div class="span4">
-			<?php View::partial('public/list');?>
-		</div>
-		<div class="span8">
-			<h1><?php echo $ptitle;?></h1>
-			<?php echo Tcode::exec(Places::get('beforepost'));?>
-			<p><i class="icon-time"></i><strong> <?php echo  BlogUtil::dateFormat($post->modified_in); ?></strong></p>
-			<div class="viewpost">
-			<?php echo Tcode::exec(Places::get('headpost').$post->content);?>
-			</div>
-			<?php
-			echo Tcode::exec(Places::get('afterpost'));?>
-		</div>
+<div class="row-fluid">
+	<div class="span4">
+		{% partial "list"%}
+	</div>
+	<div class="span8">
+		<p><i class="icon-time"></i><strong> {%k  "BlogUtil::dateFormat" post.modified_in%}</strong></p>
+		{% autoescape off %}
+		<div class="viewpost">{{post.content}}</div>
+		{% endautoescape %}
 	</div>
 </div>
-
-

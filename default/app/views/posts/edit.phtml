@@ -1,0 +1,28 @@
+<div class="page-header">
+    <h1>{{title}} : <small>{{action_name}}</small></h1>
+</div>
+{%exec View::content %}
+<div class="container">
+    <div class="row">
+        <div class="span6 offset3">
+            {%exec Form::open%}
+            <fieldset><legend>{%trans _('Posts')%}</legend>
+            <div class="control-group">
+				<label for="posts_title" class="control-label">{%trans _('Title')%}</label>
+				<div class="controls">{%exec Form::text 'posts.title' 'class="span6"' %}</div>
+			</div>
+			<div class="control-group">
+				<label for="posts_content" class="control-label">{%trans _('Text')%}</label>
+				<div class="controls">{%exec Form::textarea 'posts.content' 'class="span6"' %}</div>
+			</div>
+
+			<div class="control-group">
+				<label for="posts_content" class="control-label">{%trans _('Type Publish')%}</label>
+				<div class="controls">{%exec Form::dbSelect 'posts.post_type_id'  %}</div>
+			</div>
+            </fieldset>
+            {%partial 'submit'%}
+            {%exec Form::close%}
+        </div>
+    </div>
+</div>
