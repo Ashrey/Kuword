@@ -14,6 +14,7 @@ spl_autoload_register(function ($class) {
   'haanga_extension_tag_spaceless' => '/Extension/Tag/Spaceless.php',
   'haanga_extension_tag_exec' => '/Extension/Tag/Exec.php',
   'haanga_extension_tag_inline' => '/Extension/Tag/Inline.php',
+  'haanga_extension_tag_partial' => '/Extension/Tag/Partial.php',
   'haanga_extension_tag_upper' => '/Extension/Tag/Upper.php',
   'haanga_extension_tag_trans' => '/Extension/Tag/Trans.php',
   'haanga_extension_tag_templatetag' => '/Extension/Tag/Templatetag.php',
