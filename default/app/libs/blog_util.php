@@ -1,16 +1,19 @@
 <?php
 class BlogUtil{
-	/**
-	 * Write a record in the log
-	 */
-	static function log(){
-		$fp = fopen(PATH_APP."log.log", 'a');
-		$a_var = func_get_args();
-		fwrite($fp, '['.date('d/m/Y h:i:s') . ']');
-		foreach ($a_var as $s_value) {
-			fwrite($fp, "\t$s_value \n");
+	
+	static function range($show, $page){
+		$half =  floor( $show/2);
+		//Calculando el inicio de paginador centrado
+		if ($page->current <= $half) {
+			$start  = 2;
+		} elseif (($page->total - $page->current) < $half) {
+			$start = $page->total - $show + 1;
+			if ($start < 1)
+				$start = 1;
+		} else {
+			$start = $page->current - $half;
 		}
-		fclose($fp);
+		return range($start, min($page->total, $start + $show));
 	}
 
 	static function encodeURL($s_str){

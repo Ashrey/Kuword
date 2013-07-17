@@ -26,5 +26,6 @@ class AdminController extends Controller {
 	final protected function finalize(){
 		$this->title = Conf::get('title');
 		$this->desc  = Conf::get('desc');
+		$this->menu = Load::model('links')->getDashboardBar();
 	}
 }

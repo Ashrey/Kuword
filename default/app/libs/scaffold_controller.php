@@ -24,7 +24,7 @@ class ScaffoldController extends AdminController {
      * Nombre del paginador a usar
      * @var String
      */    
-    protected $_paginator = 'bootstrap';
+    protected $_paginator = 'paginators/bootstrap';
 
     /**
      * Array de columnas a  mostrar
@@ -66,9 +66,9 @@ class ScaffoldController extends AdminController {
 
     /**
      * Mostrar la barra de acciones
-     * @var boolean 
+     * @var Array 
      */
-    protected $_show_bar = true;
+    protected $_btn = array();
 
     /**
      * Añade la funcionalidad de iniciación
@@ -120,7 +120,7 @@ class ScaffoldController extends AdminController {
 			/* Acciones a mostrar */
 			$this->action = $this->_action;
 			/* Mostrar la barra de acciones */
-			$this->show_bar = $this->_show_bar;
+			$this->btn = $this->_btn;
 			/*Envia el paginador*/
 			$this->paginator = $this->_paginator;
 		}catch(KumbiaException $e) {
@@ -152,7 +152,7 @@ class ScaffoldController extends AdminController {
                 }
             }
             // Solo es necesario para el autoForm
-            $this->{$this->_model} = new  $this->_model();
+            $this->obj = new  $this->_model();
         } catch (KumbiaException $e) {
             Flash::error($e);
         }
@@ -183,7 +183,8 @@ class ScaffoldController extends AdminController {
 			}
         }
         //Aplicando la autocarga de objeto, para comenzar la edición
-        $this->{$this->model} = (new $this->_model())->find((int) $id);
+        $this->{$this->_model} = (new $this->_model())->find((int) $id);
+        $this->obj = $this->{$this->_model};
     }
 
     /**
@@ -211,10 +212,6 @@ class ScaffoldController extends AdminController {
         $this->cols = array_keys(get_object_vars($this->result));
     }
 
-    public function update($field) {
-        Scaffold::update(Load::_model($this->_model), $field);
-        die();
-    }
 
     /**
       -     * Retorna las columnas a consultar
@@ -242,5 +239,17 @@ class ScaffoldController extends AdminController {
         $this->action('editar', \Html::linkAction('edit/%id%', '<span class="btn"><i class="icon-edit"></i></span>'));
         $this->action('borrar', \Html::linkAction('delete/%id%', '<span class="btn"><i class="icon-trash"></i></span>', 'class="js-confirm" data-msg="¿Desea Eliminar?"'));
     }
+   
+   function defaultBtn(){
+		$this->_btn = array(
+			array(
+				'action' => 'create',
+				'icon' => 'plus',
+				'type' => 'btn-primary',
+				'text' => 'Crear'
+			)
+		);
+	}
+    
 
 }

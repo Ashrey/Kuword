@@ -15,7 +15,6 @@ class IndexController extends AppController{
 		$this->page = $publishes->all($i_page);
 		$this->ptitle=__('Timeline page %d', $i_page);
 		$this->url = null;
-		View::select('list');
 	}
 	
 	/**
@@ -43,7 +42,7 @@ class IndexController extends AppController{
 		$this->menu   = Load::model('links')->getNavBar();
 		$this->title  = Conf::get('title');
 		$this->desc   = Conf::get('desc');
-		$this->style  = Conf::get('style');
+		$this->style  = Conf::get('style').'/'.Conf::get('style');
 		$this->footer = Places::get('footer');
 	}
 }

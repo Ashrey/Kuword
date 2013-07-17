@@ -3,19 +3,19 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<?php Tag::css("bootstrap/bootstrap.min") ?>
-<?php echo Html::includeCss() ?>
-<title><?php echo $ptitle?></title>
+{% exec 'Tag::css' "bootstrap/bootstrap.min" %}
+{% exec 'Html::includeCss'%}
+<title>{{ptitle}}</title>
 </head>
 <body>
 <div class="container">
 	<header>
-		<?php View::partial('private/menu');?>
+		{% partial 'menu' %}
 	</header>
-	<div id="content"><?php View::content()?></div>
-	<?php Tag::js('jquery.min')?>
-	<?php Tag::js('tinymce/tinymce.min')?>
-	<?php echo Html::includeJs()?>
+	<div id="content">{% block content%}{%endblock%}</div>
+	{%exec Tag::js 'jquery.min' %}
+	{%exec Tag::js 'tinymce/tinymce.min'%}
+	{%exec Html::includeJs %}
 <script type="text/javascript">
 tinymce.init({
     selector: "textarea",
@@ -26,7 +26,6 @@ tinymce.init({
     ]
  });
 </script>
-
 </div>
 </body>
 </html>
