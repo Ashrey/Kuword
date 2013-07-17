@@ -28,8 +28,8 @@ class ModelForm {
      *
      * @var object 
      */
-    public static function create($_model, $data = array(), $action = NULL) {
-
+    public static function create($model, $data = array(), $action = NULL) {
+		ob_start();
         /**
          * Data extra para los campos
          */
@@ -37,15 +37,13 @@ class ModelForm {
         $switch = isset($data['switch']) ? $data['switch'] : array();
         $label = isset($data['label']) ? $data['label'] : array();
 
-
-		$model = Load::model($_model);
         $model_name = Util::smallcase(get_class($model));
         $saltos = array_keys($switch);
         if (!$action)
             $action = ltrim(Router::get('route'), '/');
         echo Form::open($action, 'post', 'class="form-horizontal well"'), PHP_EOL;
         $pk = $model->primary_key[0];
-        echo Form::hidden("{$model_name}.{$pk}", $model->$pk);
+        echo Form::hidden("{$model_name}.{$pk}",null, $model->$pk);
         echo '<fieldset>';
         $fields = array_diff($model->fields, $model->_at, $model->_in, $model->primary_key);
         foreach ($fields as $field) {
@@ -96,16 +94,17 @@ class ModelForm {
                     break;
                 case'tinytext': case 'text': case 'mediumtext': case 'longtext':
                 case 'blob': case 'mediumblob': case 'longblob': // Usar textarea
-                    echo Form::textarea($name, $css_class);
+                    echo Form::textarea($name, $css_class, $model->$field );
                     break;
                 default: //text,tinytext,varchar, char,etc se comprobara su tamaño
-                    echo Form::text($name, $css_class);
+                    echo Form::text($name, $css_class, $model->$field);
                 //break;
             }
             echo '</div></div>' . PHP_EOL;
         }
-        View::partial('private/submit');
+        View::partial('submit');
         echo '</form>', PHP_EOL;
+        return ob_get_clean();
     }
 
     public static function fieldValue($field, $model) {
