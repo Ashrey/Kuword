@@ -1,11 +1,11 @@
 <div class="page-header">
-    <h1><?php echo $title, ": <small>$action_name</small   >" ?></h1>
+    <h1>{{title}} : <small>{{action_name}}</small></h1>
 </div>
-<?php View::content(); ?>
+{%exec View::content %}
 <div class="container">
     <div class="row">
         <div class="span6 offset3">
-            <?php ModelForm::create($model) ?>
+            {%exec ModelForm::create obj %}
         </div>
     </div>
 </div>
