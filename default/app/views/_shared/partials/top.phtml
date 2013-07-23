@@ -1,8 +1,9 @@
 <div class="well">
     <div class="btn-group">
         {% for  i in btn %}
-            {Html::linkAction($b['action'], "<i class=\"icon-white icon-{$b['icon']} \"></i> {$b['text']} ", "class=\"btn {$b['type']}\"") ?>
+			{%buffer txt%}<i class="icon-white icon-{{i['icon']}}"></i> {{i['text']}}{%endbuffer%}
+			{%buffer class%}class="btn {{i['type']}}"{%endbuffer%}
+            {% exec Html::linkAction i['action'] txt class %}
         {% endfor %}
     </div>
 </div>
-

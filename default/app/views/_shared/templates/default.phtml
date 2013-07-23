@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-{% k "Tag::css" "bootstrap/bootstrap.min" %}
-{% k "Tag::css" style %}
-{% k "Html::includeCss"%} 
+{%exec Tag::css "bootstrap/bootstrap.min" %}
+{%exec Tag::css style %}
+{%exec Html::includeCss%} 
 {% if canonical %}
 	<link rel="canonical" href="{{canonical}}" />
 {% endif %}
@@ -22,10 +22,10 @@
 	<div class="span9"> {% block content %}{% endblock %}</div>
 	<div class="span3"><?php View::partial('sidebar');?></div>
 </div>
-<div id="footer"><p>{{footer}}<br />
+<div id="footer" class="text-center"><p>{{footer}}<br />
 Powered By <a href="https://github.com/Ashrey/Kuword/">KuWord</a> |
 	Style by <a href="http://www.styleshout.com/">styleshout</a>|
-	{%k "Html::link" 'feed/tl'  '(RSS)' %}</p>
+	{%exec Html::link 'feed/tl'  '(RSS)' %}</p>
 	</div>
 </body>
 </html>

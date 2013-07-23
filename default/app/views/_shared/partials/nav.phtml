@@ -1,7 +1,7 @@
 {%block menu%}
 <ul id="menu">
 {% for i in menu %}
-	<li>{% k "Html::link" i.href, i.showed_text %}</li>
+	<li>{%exec Html::link i.href, i.showed_text %}</li>
 {% endfor %}
 </ul>
 {% endblock %}

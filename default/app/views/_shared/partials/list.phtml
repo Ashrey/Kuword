@@ -2,7 +2,7 @@
 {% for i in page.items %}
 	{% buffer text %}{{i.title}}<br /><i class='icon-time'></i>{{i.modified_in}}{% endbuffer %}
 	{% buffer url %}index/post/{{i.strid}}{% endbuffer %}
-	<li>{% k "Html::link" url text %} </li>
+	<li>{%exec Html::link url text %} </li>
 {% endfor %}
 </ul>
 

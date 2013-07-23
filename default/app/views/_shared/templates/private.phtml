@@ -13,19 +13,7 @@
 		{% partial 'menu' %}
 	</header>
 	<div id="content">{% block content%}{%endblock%}</div>
-	{%exec Tag::js 'jquery.min' %}
-	{%exec Tag::js 'tinymce/tinymce.min'%}
 	{%exec Html::includeJs %}
-<script type="text/javascript">
-tinymce.init({
-    selector: "textarea",
-        plugins: [
-        "advlist autolink lists link image  preview anchor",
-        "searchreplace visualblocks code",
-        "insertdatetime media table contextmenu paste"
-    ]
- });
-</script>
 </div>
 </body>
 </html>

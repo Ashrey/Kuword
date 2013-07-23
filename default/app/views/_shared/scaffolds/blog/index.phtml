@@ -12,7 +12,7 @@
 		{% endfor %}
 		{% if action %}
 			{% exec count action as c %}
-			<th colspan="{{c}}">Acciones</th>
+			<th>Acciones</th>
 		{% endif %}
 	</thead>
 	{% for i in result.items %}
@@ -20,13 +20,10 @@
 		{% for k, v in i %}
 				<td>{%exec ModelForm::fieldValue k i%}</td>
 		{% endfor%}
-		{% for j in action %}
-			<td>{%exec str_replace '%id%' i.id j %}</td>
-		{% endfor%}
+		<td><div class="btn-group">{% for j in action %}{%exec str_replace '%id%' i.id j %}{% endfor%}</div></td>
 		</tr>
 	{%endfor%}
 	</table>
-
 	{% partial "paginator" %}
 {%else%}
 

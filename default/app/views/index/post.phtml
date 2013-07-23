@@ -1,11 +1,4 @@
-<div class="row-fluid">
-	<div class="span4">
-		{% partial "list"%}
-	</div>
-	<div class="span8">
-		<p><i class="icon-time"></i><strong> {%k  "BlogUtil::dateFormat" post.modified_in%}</strong></p>
-		{% autoescape off %}
-		<div class="viewpost">{{post.content}}</div>
-		{% endautoescape %}
-	</div>
-</div>
+<p><i class="icon-time"></i><strong> {%exec  BlogUtil::dateFormat post.modified_in%}</strong></p>
+{% autoescape off %}
+	<div class="viewpost">{{post.content}}</div>
+{% endautoescape %}

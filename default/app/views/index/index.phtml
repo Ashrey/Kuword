@@ -1,11 +1,16 @@
-<div id="posts" class="row-fluid">
-	<div class="span4">
-		{% partial "list"%}
+<div id="posts" class="row">
+	{% partial "paginator" %}
+	{% for i in result.items %}
+	<div class="span4 post">
+		{% buffer uri %}index/post/{{i.strid}}{% endbuffer %}
+	
+		<h2 class="title">{{i.title}}</h2>
+		{% autoescape off %}
+		{%exec BlogUtil::trucate i.content 500 %}
+		<p><i class="icon-time"></i>{{i.modified_in}} {%exec Html::link uri '<i class="icon-book"></i> Leer más' 'class="btn btn-primary"' %} </p>
+		{% endautoescape %}
 	</div>
-	<div class="span8">
-		<div class="alert">
-		  <button type="button" class="close" data-dismiss="alert">&times;</button>
-		  Aqui va el contenido de cada articulo o lo que se considere como principal
-		</div>
-	</div>
+	{%endfor%}
+	
 </div>
+{% partial "paginator" %}

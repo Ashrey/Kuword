@@ -12,7 +12,7 @@
 
 
 {%exec BlogUtil::range show result as range%}
-
+{% if result.total > 1 %}
 <div class="pagination text-center">
     <ul>
 		{% if result.prev %}
@@ -59,3 +59,4 @@
 
     </ul>
 </div>
+{%endif%}

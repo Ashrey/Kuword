@@ -8,7 +8,7 @@
             {% if NOT ajax %}
                 <div class="btn-group text-center">
                     {%exec Html::LinkAction 'create' 'Crear <i class="icon-plus"></i>' ' class="btn btn-primary"' %}
-                    {%exec Html::LinkAction "editar/$result->id", 'Editar <i class="icon-edit"></i>', ' class="btn btn-warning"' %}
+                    {%exec Html::LinkAction 'edit{{result.id}}', 'Editar <i class="icon-edit"></i>', ' class="btn btn-warning"' %}
                     {%exec Html::LinkAction "borrar/$result->id", 'Borrar <i class="icon-remove"></i>', ' class="btn btn-danger js-confirm" title="Está seguro?"' %}
                     {%exec Html::LinkAction '' 'Listar  <i class="icon-list"></i>' 'class="btn btn-info"' %}
                 </div>

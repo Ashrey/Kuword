@@ -26,3 +26,16 @@
         </div>
     </div>
 </div>
+	{%exec Tag::js 'jquery.min' %}
+{%exec Tag::js 'tinymce/tinymce.min'%}
+{%exec Tag::partialjs '
+tinymce.init({
+    selector: "textarea",
+        plugins: [
+        "advlist autolink lists link image  preview anchor",
+        "searchreplace visualblocks code",
+        "insertdatetime media table contextmenu paste"
+    ],
+    relative_urls: true
+ });
+'%}
