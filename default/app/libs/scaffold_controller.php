@@ -91,6 +91,7 @@ class ScaffoldController extends AdminController {
 
     protected function init() {
         $this->useCRUD();
+        $this->defaultBtn();
     }
 
     protected function after_filter() {
@@ -123,6 +124,8 @@ class ScaffoldController extends AdminController {
 			$this->btn = $this->_btn;
 			/*Envia el paginador*/
 			$this->paginator = $this->_paginator;
+			/*Envia los botones*/
+			$this->btn = $this->_btn;
 		}catch(KumbiaException $e) {
             Flash::error($e);
             die;
@@ -235,12 +238,12 @@ class ScaffoldController extends AdminController {
      * Asigna acciones básicas para el CRUD 
      */
     protected function useCRUD() {
-        $this->action('ver', \Html::linkAction('view/%id%', '<span class="btn"><i class="icon-eye-open"></i></span>'));
-        $this->action('editar', \Html::linkAction('edit/%id%', '<span class="btn"><i class="icon-edit"></i></span>'));
-        $this->action('borrar', \Html::linkAction('delete/%id%', '<span class="btn"><i class="icon-trash"></i></span>', 'class="js-confirm" data-msg="¿Desea Eliminar?"'));
+        $this->action('ver', \Html::linkAction('view/%id%', '<i class="icon-eye-open"></i>', 'class="btn"'));
+        $this->action('editar', \Html::linkAction('edit/%id%', '<i class="icon-edit"></i>', 'class="btn"'));
+        $this->action('borrar', \Html::linkAction('delete/%id%', '<i class="icon-trash"></i>', 'class="js-confirm btn btn-danger" data-msg="¿Desea Eliminar?"'));
     }
    
-   function defaultBtn(){
+   protected function defaultBtn(){
 		$this->_btn = array(
 			array(
 				'action' => 'create',
