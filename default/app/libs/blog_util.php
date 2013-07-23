@@ -13,7 +13,9 @@ class BlogUtil{
 		} else {
 			$start = $page->current - $half;
 		}
-		return range($start, min($page->total, $start + $show));
+		
+		$num = (int)$page->total;
+		return ($num == 1) ? array(1):range($start, min($page->total, $start + $show));
 	}
 
 	static function encodeURL($s_str){
@@ -74,39 +76,16 @@ class BlogUtil{
 			}
 		return strftime(Conf::get('dateformat'),$i_time);
 	}
-
-	static function shortPost($s_str){
-		$s_tmp = strip_tags($s_str);
-		unset($s_str);
-		$i_pos = isset($s_tmp[500]) ? strpos($s_tmp, ' ', 500) : strlen($s_tmp) -1;
-		return substr($s_tmp, 0, $i_pos);
-	}
-
-	static function doGzip($Proccess, $level = 9){
-		$Temp =  "\x1f\x8b\x08\x00\x00\x00\x00\x00";
-		$Size = strlen($Proccess);
-		$Crc = crc32($Proccess);
-		$Contents = gzcompress($Proccess, $level);
-		unset($Proccess);
-		$Contents = substr($Contents, 0, strlen($Contents) - 4);
-		return $Temp . $Contents . pack('V', $Crc). pack('V', $Size);
-	}
-
-	static function avatar($s_email, $s = 60, $d = 'wavatar', $r = 'g') {
-		$s_hash = md5(strtolower(trim($s_email)));
-		return "http://www.gravatar.com/avatar/$s_hash?s=$s&amp;d=$d&amp;r=$r";
-	}
-
-	static function niceComment($s_str){
-		/*Subtituye eoticones*/
-		$s_str = preg_replace('/(^|\s)(;\)|:\/|:\||:\(|:\)|:D|:P|o.O|<3|:@|:\'\(|:S|:\$|:#|:O)/ei',
-		"'\\1'.Htag::image_to('smile/\\2.png')", $s_str);
-		// enlaces imagenes
-		$s_str = preg_replace('/(^|\s)@(\w+)/e',
-		"'\\1@'.Htag::link_to('pages/reply/\\2', '\\2', array('rel'=>'nofollow'))", $s_str);
-		$s_str = preg_replace('/(^|\s)#(\w+)/e',
-		"'\\1#'.Htag::link_to('pages/reply/\\2', '\\2', array('rel'=>'nofollow'))", $s_str);
-		return  nl2br($s_str);
+	
+	static function trucate($text, $lenght){
+		if(!isset($text[$lenght])){
+			return $text;
+		}
+		$dom = new DOMDocument('1.0', 'utf-8');
+		$html = substr("$text",0,  strpos ($text, '</', $lenght));
+		$dom->loadHTML($html);
+		$html = preg_replace("/\<\/?(body|html)>/", "", $dom->saveHTML());
+		return $html;
 	}
 }
-?>
+
