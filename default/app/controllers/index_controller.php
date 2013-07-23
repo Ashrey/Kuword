@@ -4,16 +4,14 @@ class IndexController extends AppController{
 	public function before_filter(){
 		Load::model('places');
 		Plugins::init();
-		$this->page =Load::model('posts')->all(1);
 		if (Input::isAjax()) {
 		  View::template(NULL);
 		}
 	}
 	public function index($i_page = 1){
 		$i_page = (int)$i_page;
-		$publishes = Load::model('posts');
-		$this->page = $publishes->all($i_page);
-		$this->ptitle=__('Timeline page %d', $i_page);
+		$this->result = Load::model('posts')->all($i_page);
+		$this->ptitle=__('Timeline - (Page %d)', $i_page);
 		$this->url = null;
 	}
 	
