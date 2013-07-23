@@ -6,7 +6,7 @@ class Posts extends ActiveRecord {
 	}
 	
 	function index($cond, $page){
-		return $this->paginate("page: $page", 'per_page: 2','order: modified_in DESC', 
+		return $this->paginate("page: $page", 'order: modified_in DESC', 
 		'columns: posts.id, title, strid, modified_in, pt.name as post_type',
 		'join: JOIN post_type pt ON post_type_id = pt.id'
 		);
