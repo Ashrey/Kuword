@@ -24,6 +24,8 @@ class IndexController extends AppController{
 		if($o_post){
 			$this->post = $o_post;
 			$this->ptitle = $o_post->title;
+			$p = new Parsedown();
+			$this->text = $p->parse($o_post->content);
 			$this->canonical = Html::url("post/{$o_post->strid}");
 		}else{
 			$this->_notFound();

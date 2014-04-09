@@ -78,14 +78,9 @@ class BlogUtil{
 	}
 	
 	static function trucate($text, $lenght){
-		if(!isset($text[$lenght])){
-			return $text;
-		}
-		$dom = new DOMDocument('1.0', 'utf-8');
-		$html = substr("$text",0,  strpos ($text, '</', $lenght));
-		$dom->loadHTML($html);
-		$html = preg_replace("/\<\/?(body|html)>/", "", $dom->saveHTML());
-		return $html;
+		$html = isset($text[$lenght]) ? substr($text,0,  strpos ($text, "\n", $lenght)) : $text;
+		$parse = new Parsedown();
+		return $parse->parse($html);
 	}
 }
 
