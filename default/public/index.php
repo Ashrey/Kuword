@@ -12,7 +12,7 @@
  * obtain it through the world-wide-web, please send an email
  * to license@kumbiaphp.com so we can send you a copy immediately.
  *
- * @copyright  Copyright (c) 2005-2012 Kumbia Team (http://www.kumbiaphp.com)
+ * @copyright  Copyright (c) 2005-2014 Kumbia Team (http://www.kumbiaphp.com)
  * @license    http://wiki.kumbiaphp.com/Licencia     New BSD License
  */
 
@@ -33,7 +33,7 @@ ini_set('display_errors', 'On');
 /**
  * Define marca de tiempo en que inicio el Request
  */
-define('START_TIME', microtime(1));
+define('START_TIME', microtime(TRUE));
 
 /**
  * Define el APP_PATH
@@ -60,16 +60,14 @@ define('CORE_PATH', dirname(dirname(APP_PATH)) . '/core/');
  * - Esta ruta la utiliza Kumbia como base para generar las Urls para acceder de lado de
  *   cliente (con el navegador web) y es relativa al DOCUMENT_ROOT del servidor web
  */
-if ($_SERVER['QUERY_STRING']) {
-    define('PUBLIC_PATH', substr(urldecode($_SERVER['REQUEST_URI']), 0, - strlen($_SERVER['QUERY_STRING']) + 6));
-} else {
-    define('PUBLIC_PATH', $_SERVER['REQUEST_URI']);
-}
-
+$public_path = isset($_SERVER['PATH_INFO']) ?
+    substr(urldecode($_SERVER['REQUEST_URI']), 0, - strlen(urldecode($_SERVER['PATH_INFO']))+1):
+    $_SERVER['REQUEST_URI'];
+define('PUBLIC_PATH', $public_path);
 /**
  * Obtiene la url
  */
-$url = isset($_GET['_url']) ? $_GET['_url'] : '/';
+$url = empty($_SERVER['PATH_INFO']) ? '/' : $_SERVER['PATH_INFO'];
 
 /**
  * Carga el gestor de arranque
@@ -77,5 +75,5 @@ $url = isset($_GET['_url']) ? $_GET['_url'] : '/';
  *
  * @see Bootstrap
  */
-//require APP_PATH . 'libs/bootstrap.php'; //bootstrap de app
-require CORE_PATH . 'kumbia/bootstrap.php'; //bootstrap del core 
+require APP_PATH . 'libs/bootstrap.php'; //bootstrap de app
+//require CORE_PATH . 'kumbia/bootstrap.php'; //bootstrap del core 
