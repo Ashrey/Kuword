@@ -3,17 +3,14 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-{% exec Tag::css "admin/style" %}
-{% exec 'Html::includeCss'%}
+{%css "admin/style" %}
 <title>{{ptitle}}</title>
 </head>
-<body>
-<div class="container">
+<body class="container">
 	<header>
-		{% partial 'menu' %}
+		<h1>{{title}}</h1> {% inline '_partial/menu.phtml' %}
 	</header>
 	<div id="content">{% block content%}{%endblock%}</div>
-	{%exec Html::includeJs %}
-</div>
 </body>
+{% block jsblock%}{%endblock%}
 </html>
