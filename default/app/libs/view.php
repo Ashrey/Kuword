@@ -19,7 +19,7 @@ class View extends KumbiaView {
         return ob_get_clean();
     }
 
-	public static function render(/* Controller */ $controller, /* Router */  $_url){
+	public static function render(/* Controller */ $controller){
 		/* Guarda el controlador actual*/
 		self::$_controller = $controller;
 		

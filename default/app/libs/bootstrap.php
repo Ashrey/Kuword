@@ -5,5 +5,6 @@
 // Arranca KumbiaPHP
 $vendor = dirname(dirname(dirname(__DIR__))).'/vendor/';
 require "$vendor/parsedown/Parsedown.php";
+
 require_once CORE_PATH . 'kumbia/bootstrap.php';
 

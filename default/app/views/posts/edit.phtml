@@ -4,21 +4,34 @@
 {%exec View::content %}
 <div class="container">
     <div class="row">
-        <div class="span6 offset3">
+        <div class="col-10 offset-1">
             {%exec Form::open%}
             <fieldset><legend>{%trans _('Posts')%}</legend>
             <div class="control-group">
-				<label for="posts_title" class="control-label">{%trans _('Title')%}</label>
-				<div class="controls">{%exec Form::text 'posts.title' 'class="span6"' %}</div>
+				<label for="posts_title" class="control">{%trans _('Title')%}</label>
+				<div class="controls">{%exec Form::text 'posts.title' 'class="control"' %}</div>
 			</div>
 			<div class="control-group">
-				<label for="posts_content" class="control-label">{%trans _('Text')%}</label>
-				<div class="controls">{%exec Form::textarea 'posts.content' 'class="span6"' %}</div>
+				<label for="posts_content" class="control">{%trans _('Text')%}</label>
+                <div class="row">
+				<div class="col-6 entry-markdown-content">
+                {%exec Form::textarea 'posts.content' 'class="control entry-markdown"' %}</div>
+                <div class="col-6">
+                    <section class="entry-preview active">
+                        <header class="floatingheader">
+                          &nbsp;&nbsp; Preview <span class="entry-word-count">0 words</span>
+                        </header>
+                        <section class="entry-preview-content">
+                            <div class="rendered-markdown"></div>
+                        </section>
+                    </section>
+                </div>
+                </div>
 			</div>
 
 			<div class="control-group">
 				<label for="posts_content" class="control-label">{%trans _('Type Publish')%}</label>
-				<div class="controls">{%exec Form::dbSelect 'posts.post_type_id'  %}</div>
+				<div class="controls">{%exec Form::dbSelect 'posts.post_type_id' %}</div>
 			</div>
             </fieldset>
             {%partial 'submit'%}
@@ -26,16 +39,5 @@
         </div>
     </div>
 </div>
-	{%exec Tag::js 'jquery.min' %}
-{%exec Tag::js 'tinymce/tinymce.min'%}
-{%exec Tag::partialjs '
-tinymce.init({
-    selector: "textarea",
-        plugins: [
-        "advlist autolink lists link image  preview anchor",
-        "searchreplace visualblocks code",
-        "insertdatetime media table contextmenu paste"
-    ],
-    relative_urls: true
- });
-'%}
+{%exec Tag::js 'zepto.min' %}
+{%exec Tag::js 'marked'%}
