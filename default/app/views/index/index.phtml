@@ -1,5 +1,7 @@
+{%extends  'default.phtml' %}
+{%block content %}
 <div id="posts" class="row">
-	{% partial "paginator" %}
+	{% inline "_partial/paginator.phtml" %}
 	{% for i in result.items %}
 	<div class="span4 post">
 		{% buffer uri %}index/post/{{i.strid}}{% endbuffer %}
@@ -13,4 +15,5 @@
 	{%endfor%}
 	
 </div>
-{% partial "paginator" %}
+{% inline "_partial/paginator.phtml" %}
+{%endblock%}
