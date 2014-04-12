@@ -1,30 +1,30 @@
-<div class="page-header">'
-    <h1>{{title}}</h1>
-</div>
-{% exec View::getContent %}
-{% partial 'top' %}
-{%if result.items %}
-	<table class="table table-bordered table-condensed table-hover">
-		{%exec current result.items  as head %}
-		<thead>
-		{% for i in cols %}
-			<th>{%exec head.get_alias i %}</th>
-		{% endfor %}
-		{% if action %}
-			{% exec count action as c %}
-			<th>Acciones</th>
-		{% endif %}
-	</thead>
-	{% for i in result.items %}
-		<tr>
-		{% for k, v in i %}
-				<td>{%exec ModelForm::fieldValue k i%}</td>
-		{% endfor%}
-		<td><div class="btn-group">{% for j in action %}{%exec str_replace '%id%' i.id j %}{% endfor%}</div></td>
-		</tr>
-	{%endfor%}
-	</table>
-	{% partial "paginator" %}
-{%else%}
+{%extends  'admin.phtml' %}
+{% block content%}
+	{% exec Flash::content %}
+	{% inline '_partial/top.phtml' %}
+	{%if result.items %}
+		<table class="table table-bordered table-condensed table-hover">
+			{%exec current result.items  as head %}
+			<thead>
+			{% for i in cols %}
+				<th>{%exec head.get_alias i %}</th>
+			{% endfor %}
+			{% if action %}
+				{% exec count action as c %}
+				<th>Acciones</th>
+			{% endif %}
+		</thead>
+		{% for i in result.items %}
+			<tr>
+			{% for k, v in i %}
+					<td>{%exec ModelForm::fieldValue k i%}</td>
+			{% endfor%}
+			<td><div class="btn-group">{% for j in action %}{%exec str_replace '%id%' i.id j %}{% endfor%}</div></td>
+			</tr>
+		{%endfor%}
+		</table>
+		{% inline '_partial/paginator.phtml'%}
+	{%else%}
 
-{%endif%}
+	{%endif%}
+{%endblock%}

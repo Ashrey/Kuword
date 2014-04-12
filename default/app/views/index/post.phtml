@@ -1,4 +1,8 @@
-<p><i class="icon-time"></i><strong> {%exec  BlogUtil::dateFormat post.modified_in%}</strong></p>
-{% autoescape off %}
-	<div class="viewpost">{{text}}</div>
-{% endautoescape %}
+{%extends  'default.phtml' %}
+{%block content %}
+    <p><i class="fa fa-time"></i>
+    <strong> {%exec  BlogUtil::dateFormat post.modified_in%}</strong></p>
+    {% autoescape off %}
+    	<div class="viewpost">{{text}}</div>
+    {% endautoescape %}
+{%endblock%}
