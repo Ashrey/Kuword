@@ -22,6 +22,7 @@
  * @license    http://wiki.kumbiaphp.com/Licencia     New BSD License
  */
 class Flash {
+    protected static $buffer = array();
 
     /**
      * Visualiza un mensaje flash
@@ -30,12 +31,34 @@ class Flash {
      * @param string $text 	Mensaje a mostrar
      */
     public static function show($name, $text) {
-        if (isset($_SERVER['SERVER_SOFTWARE'])) {
-            echo '<div class="', $name, ' alert flash" data-alert="alert" data-dismiss1="alert">
-                <a class="close" data-dismiss="alert"  href="#">×</a>', $text, '</div>', PHP_EOL;
-        } else {
-            echo $name, ': ', strip_tags($text), PHP_EOL;
+        if(!isset(self::$buffer[$name])) {
+            self::$buffer[$name] = array($text);
+        }else{
+            self::$buffer[$name][] = $text;
         }
+    }
+
+    /**
+     * Get content buffer
+     * @return string
+     */
+    public static function content(){
+        if (Session::has('KUMBIA.CONTENT', 'FlashBuffer')) {
+            $content = Session::get('KUMBIA.CONTENT', 'FlashBuffer');
+            Session::delete('KUMBIA.CONTENT', 'FlashBuffer');
+            return $content;
+        }
+        $buffer = '';
+        foreach(self::$buffer as $name => $value){
+            $buffer .= "<div class=\"$name alert flash\" data-alert=\"alert\" data-dismiss1=\"alert\">
+                <a class=\"close\" data-dismiss=\"alert\"  href=\"#\">×</a><ul>";
+            foreach($value as $text){
+                $buffer .= "<li>$text</li>";
+            }
+            $buffer.='</ul></div>';
+        }
+        self::$buffer = array();
+        return $buffer;
     }
 
     /**
@@ -44,7 +67,7 @@ class Flash {
      * @param string $text
      */
     public static function error($text) {
-        return self::show('alert-error error', $text);
+        return self::show('alert-danger', $text);
     }
 
     /**
@@ -53,7 +76,7 @@ class Flash {
      * @param string $text
      */
     public static function warning($text) {
-        return self::show('alert-warning warning', $text);
+        return self::show('alert-warning', $text);
     }
 
     /**
@@ -62,7 +85,7 @@ class Flash {
      * @param string $text
      */
     public static function info($text) {
-        return self::show('alert-info info', $text);
+        return self::show('alert-info', $text);
     }
 
     /**
@@ -71,7 +94,7 @@ class Flash {
      * @param string $text
      */
     public static function valid($text) {
-        return self::show('alert-valid alert-success valid', $text);
+        return self::show('alert-success', $text);
     }
 
     /**
@@ -93,7 +116,7 @@ class Flash {
      * @deprecated  ahora Flash::valid()
      */
     public static function success($text) {
-        return self::show('alert-valid alert-success valid', $text);
+        return self::show('alert-success', $text);
     }
 
 }
