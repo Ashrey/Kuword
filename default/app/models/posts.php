@@ -1,28 +1,30 @@
 <?php
 class Posts extends ActiveRecord {
 	
-	function initialize(){
-		
-	}
+	/**
+     * Devuelve el SQL para paginación
+     * @return string sql
+     */
+    public static function index() {
+        return  array(
+            'fields' => 'posts.id, title, strid, modified_in, pt.name as post_type',
+            'join'   => 'JOIN post_type pt ON post_type_id = pt.id',
+        );
+    }
 	
-	function index($cond, $page){
-		return $this->paginate("page: $page", 'order: modified_in DESC', 
-		'columns: posts.id, title, strid, modified_in, pt.name as post_type',
-		'join: JOIN post_type pt ON post_type_id = pt.id'
-		);
-	}
-	
-	function all($page = 1){
-		$ppage = 15;
-		return $this->paginate('order: modified_in desc',
-					"page: $page",
-					"per_page: $ppage",
-					'conditions: post_type_id = 1');		
+	static function all($page = 1){
+		return self::paginate(array(
+		    'order' => 'modified_in desc',
+			'where' => 'post_type_id = 1'
+		),
+		$page, 10);		
 	}
 	
 	function getPostBySlug($slug){
-		return $this->find_first("conditions: post_type_id = 1 AND
-		 strid = '$slug'");
+		return self::first(
+		    array('where' => 'post_type_id = 1 AND strid = :slug'), 
+		    array(':slug' => $slug)
+		);
 	}
 	
 	function getPageBySlug($slug){

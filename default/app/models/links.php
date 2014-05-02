@@ -5,11 +5,10 @@ class Links extends ActiveRecord {
 	}
 	
 	function getNavBar(){
-		return $this->find("conditions: link_type_id = 1");
+		return self::all(array('where' => 'link_type_id = 1'));
 	}
 	
 	function getDashboardBar(){
-		return $this->find("conditions: link_type_id = 2");
+		return self::all(array('where' =>  'link_type_id = 2'));
 	}
-	
 }
