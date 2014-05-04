@@ -11,7 +11,8 @@
  */
 Config::read('databases');
 
-\Kumbia\ActiveRecord\Db::setConfig(Config::get('databases.development'));
+\Kumbia\ActiveRecord\Db::setConfig(array('default' => Config::get('databases.development')));
+\Kumbia\ActiveRecord\Db::setConfig(include KBACKEND_PATH.'/config/databases.php');
 class ActiveRecord extends \Kumbia\ActiveRecord\ActiveRecord{
 
 }

@@ -1,4 +1,5 @@
 <?php
+Load::model('posts');
 class IndexController extends AppController{
 	
 	public function before_filter(){
@@ -10,7 +11,7 @@ class IndexController extends AppController{
 	}
 	public function index($i_page = 1){
 		$i_page = (int)$i_page;
-		$this->result = Load::model('posts')->all($i_page);
+		$this->pag = Posts::all($i_page);
 		$this->ptitle=__('Timeline - (Page %d)', $i_page);
 		$this->url = null;
 	}
@@ -26,7 +27,7 @@ class IndexController extends AppController{
 			$this->ptitle = $o_post->title;
 			$p = new Parsedown();
 			$this->text = $p->parse($o_post->content);
-			$this->canonical = Html::url("post/{$o_post->strid}");
+			$this->canonical = PUBLIC_PATH."post/{$o_post->strid}";
 		}else{
 			$this->_notFound();
 		}
