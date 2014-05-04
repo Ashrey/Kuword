@@ -6,11 +6,11 @@
 {%css "admin/style" %}
 <title>{{ptitle}}</title>
 </head>
-<body class="container">
-	<header>
-		<h1>{{title}}</h1> {% inline '_partial/menu.phtml' %}
+<body>
+	<header class="navbar">
+		{% inline '_partial/menu.phtml' %}
 	</header>
-	<div id="content">{% block content%}{%endblock%}</div>
+	<div id="content" class="container">{% block content%}{%endblock%}</div>
 </body>
 {% block jsblock%}{%endblock%}
 </html>

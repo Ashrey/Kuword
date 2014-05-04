@@ -1,11 +1,11 @@
-<nav class="navbar ">
+<nav class="navbar navbar-default" >
 	 <div class="navbar-inner">
-		{% exec Html::link '' title 'class="brand"' %}
-		<ul class="nav">
+		<h2>{% exec Html::link '' title 'class="navbar-brand"' %}</h2>
+		<ul class="nav nav-pills nav-justified">
 		{% for i in menu  %}
 			{%exec json_decode i.metadata as meta%}
 			{% buffer icon%}
-				{%if meta.icon %}<i class="icon-{{meta.icon}} icon-2x"></i>{{i.showed_text}}{%endif%}
+				{%if meta.icon %}<i class="fa fa-{{meta.icon}} fa-2x"></i>{{i.showed_text}}{%endif%}
 			{%endbuffer%}
 			<li>{% exec Html::link i.href, icon %}</li>
 		{% endfor%}

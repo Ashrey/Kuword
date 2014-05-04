@@ -2,15 +2,15 @@
 {%block content %}
 <div id="posts" class="row">
 	{% inline "_partial/paginator.phtml" %}
-	{% for i in result.items %}
-	<div class="span4 post">
+	{% for i in pag %}
+	<div class="post">
 		{% buffer uri %}index/post/{{i.strid}}{% endbuffer %}
-	
 		<h2 class="title">{{i.title}}</h2>
 		{% autoescape off %}
 		{%exec BlogUtil::trucate i.content 500 %}
-		<p><i class="icon-time"></i>{{i.modified_in}} {%exec Html::link uri '<i class="icon-book"></i> Leer más' 'class="btn btn-primary"' %} </p>
+		<p><i class="fa fa-calendar-o"></i>{{i.modified_in}} {%exec Html::link uri '<i class="fa fa-book"></i> Leer más' 'class="btn btn-primary"' %} </p>
 		{% endautoescape %}
+		<hr class="clean" />
 	</div>
 	{%endfor%}
 	

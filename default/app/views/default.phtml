@@ -3,6 +3,7 @@
 <head>
 {%css "admin/style" %}
 {%css style %}
+
 {% if canonical %}
 	<link rel="canonical" href="{{canonical}}" />
 {% endif %}
@@ -10,21 +11,23 @@
 <meta http-equiv="content-type" content="application/xhtml+xml; charset=UTF-8" />
 </head>
 <body class="container">
-	<header class="row">
+    <div id="wrap">
+	<header class="row" id="top">
 		<h1 id="logo" class="col-6">{{title}}</h1>
 		<h2 id="slogan" class="col-6">{{desc}}</h2>
 	</header>
 	<div id="menu">{% inline  "_partial/nav.phtml" %}</div>
-	<div id="content" >
+	<div id="content" class="row">
 		<h1>{{ptitle}}</h1>
 		<div class="col-9"> {% block content %}{% endblock %}</div>
 		<div class="col-3">{% block sidebar%}{%endblock%}</div>
 	</div>
 
-<footer class="text-center"><p>{{footer}}<br />
-Powered By <a href="https://github.com/Ashrey/Kuword/">KuWord</a> |
-	Style by <a href="http://www.styleshout.com/">styleshout</a>|
-	{%exec Html::link 'feed/tl'  '(RSS)' %}</p>
-</footer>
+    <footer class="text-center"><p>{{footer}}<br />
+    Powered By <a href="https://github.com/Ashrey/Kuword/">KuWord</a> |
+    	Style by <a href="http://www.styleshout.com/">styleshout</a>|
+    	{%exec Html::link 'feed/tl'  '(RSS)' %}</p>
+    </footer>
+    </div>
 </body>
 </html>

@@ -1,62 +1,24 @@
-{% if NOT url|exists %}
-	{% exec Router::get as r%}
-    {%buffer url%}{{r['controller']}}/{{r['action']}}{%endbuffer%}
-    {% if module %}
-		{%buffer url%} {{r['module']}}/{{url}}{%endbuffer%}
-    {%endif%}
-{%endif%}
+{% set total = pag.nextPage %}
+{% if total > 1 %}
+{% set next = pag.nextPage %}
+{% set prev = pag.prevPage %}
 
-{% if NOT show|exists %}
-    {%buffer show%}10{%endbuffer%}
-{% endif %}
-
-
-{%exec BlogUtil::range show result as range%}
-{% if result.total > 1 %}
-<div class="pagination text-center">
-    <ul>
-		{% if result.prev %}
-			{% buffer href %}{{url}}/{{result.prev}}{%endbuffer%}
-           <li class="prev">{% exec Html::link href _('Prev') 'title="Ir a la pág. anterior"'%}</li>
+<div class="text-center">
+    <ul class="pagination">
+        {%if ! pag.prevPage | null%}
+            {# previous page #}
+            {%buffer href%}{%exec str_replace '-_page_-', prev, url%}{%endbuffer%}
+            <li class="prev">{%exec Html::link href, 'Anterior', 'title="Ir a la pág. anterior"' %}</li>
         {% else %}
-           <li class="prev  disabled"><a title="{% trans _('Go to previous result') %}" href="#">{% trans _('Prev')%}</a></li>
+            <li class="prev  disabled"><a title="Ir a la pág. anterior" href="#">Anterior</a></li>
         {%endif%}
 
-		{% if result.current == 1 %}
-			<li class="active"><a href="#">1</a><li>
-		{% else  %}
-			<li>{%exec Html::link url '1' %}</li>
-		{%endif%}
-        
-        {% exec reset range as start%}
-        {% if start > 2 %}
-            <li><a href="#">...</a></li>
-		{%endif%}
-		
-		{# verificar esto#}
-        {% for i in range %}
-            {% if i == result.current%}
-				<li class="active"><a href='#'>{{i}}</a><li>
-			{%else%}
-				{% buffer href%}{{url}}/{{i}}{%endbuffer%}
-				<li>{% exec Html::link href i %} </li>
-            {%endif%}
-        {% endfor %}
-
-        {% if result.total > i %}
-            <li><a href="#">...</a></li>
-            {% buffer href%}{{url}}/{{result.total}}{%endbuffer%}
-            <li>{% exec  Html::link href result.total %}</li>
-        {%endif%}
-
-
-        {% if result.next %}
-			{% buffer href%}{{url}}/{{result.next}}{%endbuffer%}
-			<li class="prev">{%exec Html::link href _('Next') 'class="nextprev"'%}</li>
+        {% if ! pag.nextPage | null %}
+            {%buffer href%}{%exec str_replace '-_page_-', next, url%}{%endbuffer%}
+            <li class="prev">{% exec Html::link href, 'Siguiente', 'title="Ir a la pág. siguiente" class="nextprev"' %}</li>
         {% else %}
-            <li class="prev disabled"><a title="Ir a la pág. siguiente" href="">{% trans _('Next')%}</a></li>
+            <li class="prev disabled"><a title="Ir a la pág. siguiente" href="#">Siguiente</a></li>
         {% endif %}
-
     </ul>
 </div>
 {%endif%}
