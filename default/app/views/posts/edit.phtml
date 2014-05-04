@@ -20,7 +20,7 @@
 
 			<div class="control-group">
 				<label for="posts_content" class="control-label">{%trans _('Type Publish')%}</label>
-				<div class="controls">{%exec Form::dbSelect 'posts.post_type_id' %}</div>
+				<div class="controls">{%exec Form::select 'posts.post_type_id', sel,'class="control"', NULL, 'Seleccione'%}</div>
 			</div>
             </fieldset>
             {%inline '_partial/submit.phtml'%}
@@ -32,12 +32,16 @@
     {%js 'zepto.min' %}
     {%js 'marked'%}
 <script type="text/javascript">
+'use strict';
     $(function(){
-        var editor = $('#posts_content'), render = $('#rendered-markdown');
-        editor.on('keypress', function(e){
-                var text = editor.val();
-                render.html(marked(text));
-        });
+        var editor = $('#posts_content'), render = $('#rendered-markdown'), 
+            cb= function(e){
+            var text = editor.val();
+            render.html(marked(text));
+            editor.height(render.height());
+            };
+        editor.on('keyup', cb);
+        $(cb);
     });
 </script>
 {%endblock%}
