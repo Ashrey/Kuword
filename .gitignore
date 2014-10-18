@@ -1,2 +1,4 @@
 default/app/temp/cache/haanga/*.php
 vendor/*
+default/public/resource/*
+*.lock
