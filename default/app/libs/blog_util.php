@@ -62,8 +62,8 @@ class BlogUtil{
 	
 	static function trucate($text, $lenght){
 		$html = isset($text[$lenght]) ? substr($text,0,  strpos ($text, "\n", $lenght)) : $text;
-		$parse = new Parsedown();
-		return $parse->parse($html);
+		$parse = new Parser();
+		return $parse->text($html);
 	}
 }
 
