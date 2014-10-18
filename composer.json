@@ -1,0 +1,7 @@
+{
+    "require": {
+        "ashrey/php-gettext": "dev-master",
+        "phpmailer/phpmailer": "dev-master",
+        "erusev/parsedown-extra": "dev-master"
+    }
+}
