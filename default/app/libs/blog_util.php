@@ -1,23 +1,6 @@
 <?php
 class BlogUtil{
 	
-	static function range($show, $page){
-		$half =  floor( $show/2);
-		//Calculando el inicio de paginador centrado
-		if ($page->current <= $half) {
-			$start  = 2;
-		} elseif (($page->total - $page->current) < $half) {
-			$start = $page->total - $show + 1;
-			if ($start < 1)
-				$start = 1;
-		} else {
-			$start = $page->current - $half;
-		}
-		
-		$num = (int)$page->total;
-		return ($num == 1) ? array(1):range($start, min($page->total, $start + $show));
-	}
-
 	static function encodeURL($s_str){
 		$a_char = array (
 			'?' => '', '¿'=> '','!'=> '', '*'=> '', '&'=> 'and', '@'=> 'at',
