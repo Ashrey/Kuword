@@ -60,9 +60,11 @@ define('CORE_PATH', dirname(dirname(APP_PATH)) . '/core/');
  * - Esta ruta la utiliza Kumbia como base para generar las Urls para acceder de lado de
  *   cliente (con el navegador web) y es relativa al DOCUMENT_ROOT del servidor web
  */
-$number  =  isset($_SERVER['PATH_INFO'])  ?  strlen(urldecode($_SERVER['PATH_INFO'])) - 1: 0;
-$number += empty($_SERVER['QUERY_STRING'])? 0:strlen(urldecode($_SERVER['QUERY_STRING']))+1;
-define('PUBLIC_PATH', substr(urldecode($_SERVER['REQUEST_URI']), 0, -$number));
+$url = empty($_SERVER['PATH_INFO']) ?  '/' : $_SERVER['PATH_INFO'];
+$query = empty($_SERVER['QUERY_STRING'])? '': '?' .urldecode($_SERVER['QUERY_STRING']);
+$exc = $url . $query;
+$path =  substr(urldecode($_SERVER['REQUEST_URI']), 0, -strlen($exc)).'/';
+define('PUBLIC_PATH',$path);
 /**
  * Obtiene la url
  */
