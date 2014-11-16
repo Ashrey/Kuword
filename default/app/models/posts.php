@@ -1,5 +1,9 @@
 <?php
 class Posts extends ActiveRecord {
+
+    protected function init(){
+        $this->oneToOne('PostType');
+    }
 	
 	/**
      * Devuelve el SQL para paginación
