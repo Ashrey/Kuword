@@ -1,6 +1,7 @@
 <?php
-Load::model('posts');
-Load::model('post_type');
+use \KBackend\Libs\Paginator;
+Load::models('posts', 'post_type');
+
 class PostsController extends ScaffoldController{
 	public $_model = 'posts';
 	
@@ -11,6 +12,15 @@ class PostsController extends ScaffoldController{
     function edit($id){
         $this->sel = PostType::all();
         parent::edit($id);
+    }
+
+     protected function createPaginator(){
+        $param = array(
+            'fields' => 'Posts.id, title, modified_in, name',
+            'join'   => 'JOIN PostType as r ON post_type_id = r.id',
+            'order'  => 'Posts.id DESC'
+        );
+        return new Paginator($this->_model, $param);
     }
 	
 }
