@@ -1,5 +1,5 @@
 <?php
-Load::model('posts');
+Load::models('posts', 'post_type');
 class IndexController extends AppController{
 	
 	public function before_filter(){
