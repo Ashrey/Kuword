@@ -9,10 +9,9 @@
  * @package Db
  * @subpackage ActiveRecord
  */
+\KBackend\Libs\Config::read('backend');
 Config::read('databases');
-
 \Kumbia\ActiveRecord\Db::setConfig(array('default' => Config::get('databases.development')));
-\Kumbia\ActiveRecord\Db::setConfig(include KBACKEND_PATH.'/config/databases.php');
-class ActiveRecord extends \Kumbia\ActiveRecord\ActiveRecord{
-
+class ActiveRecord extends \KBackend\Libs\ARecord{
+    protected static $database = 'default';
 }
