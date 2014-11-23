@@ -1,5 +1,6 @@
 <?php
 class BlogUtil{
+	const IMG_REGEXP = '/!\\[(.+)\\]\\((.+)\\)/';
 	
 	static function encodeURL($s_str){
 		$a_char = array (
@@ -63,7 +64,14 @@ class BlogUtil{
 	static function trucate($text, $lenght){
 		$html = isset($text[$lenght]) ? substr($text,0,  strpos ($text, "\n", $lenght)) : $text;
 		$parse = new Parser();
-		return $parse->text($html);
+		return $parse->text(preg_replace(self::IMG_REGEXP, '', $html));
+	}
+
+	static function image($text){
+		if(preg_match(self::IMG_REGEXP, $text, $m) == 1){
+			return $m[2];
+		}
+		return 'img.php';
 	}
 }
 
