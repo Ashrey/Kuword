@@ -35,4 +35,12 @@ class Posts extends ActiveRecord {
 		return $this->find_first("conditions: type_id = 2 AND
 		 strid = '$slug'");
 	}
+
+    static function getSection($token){
+        $a = self::first(
+            array('where' =>  'strid=:token'),
+            array(':token'=>$token)
+        );
+        return isset($a->content)?$a->content:'';
+    }
 }
