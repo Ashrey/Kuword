@@ -1,6 +1,7 @@
 <?php
 use \KBackend\Libs\Paginator;
-Load::models('posts', 'post_type');
+Load::model('posts');
+Load::model('post_type');
 
 class PostsController extends ScaffoldController{
 	public $_model = 'posts';
