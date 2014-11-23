@@ -14,4 +14,11 @@ Config::read('databases');
 \Kumbia\ActiveRecord\Db::setConfig(array('default' => Config::get('databases.development')));
 class ActiveRecord extends \KBackend\Libs\ARecord{
     protected static $database = 'default';
+
+    public static function getTable()
+    {
+        $class = explode('\\', get_called_class());
+        $name = strtolower(end($class));
+        return "$name";
+    }
 }
