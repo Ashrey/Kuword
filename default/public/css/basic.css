@@ -1,0 +1,62 @@
+div#list .post{
+    height: 38ex;
+    overflow: hidden;
+}
+
+div#list h2.t-post{
+    font-size:150%;
+    padding:0;
+    text-align:center;
+    line-height:normal;
+}
+
+div.calendar{
+    border: solid black 2px;
+    border-radius: 1ex;
+    float:right;
+    text-align: center;
+    width: 8ex;
+    height: 8ex;
+    position: absolute;
+    z-index: 9999;
+    background: #fff;
+}
+
+div.calendar .c-year{
+    display: none;
+    background: black;
+    color: white;
+}
+
+div.calendar .c-day{
+    display: block;
+    font-weight: bold;
+    font-size: 130%;
+}
+
+div.calendar:hover .c-day{
+    display: none;
+}
+
+div.calendar:hover .c-year{
+    display: block;
+}
+
+div.post header .info{
+    width:100%;
+    overflow: hidden;
+    height: 15ex;
+    position:relative;
+}
+
+div.post header .info img{
+    max-width: 100%;
+    position:absolute;
+    left: 50%;top:0;
+    transform: translate(-50%);
+}
+
+div.viewpost img{
+    border:none;
+    float:right;
+}

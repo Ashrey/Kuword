@@ -1,48 +1,56 @@
 {%extends  'admin.phtml' %}
 {%block content %}
 {%exec Flash::content %}
-    <div class="row">
-        <div class="col-10 offset-1">
-            {%exec Form::open%}
-            <fieldset><legend>{%trans _('Posts')%}</legend>
-            <div class="control-group">
-				<label for="posts_title" class="control">{%trans _('Title')%}</label>
-				<div class="controls">{%exec Form::text 'posts.title' 'class="control"' %}</div>
-			</div>
-			<div class="control-group">
-				<label for="posts_content" class="control">{%trans _('Text')%}</label>
-                <div class="row">
-				<div class="col-6 entry-markdown-content">
-                {%exec Form::textarea 'posts.content' 'class="control entry-markdown"' %}</div>
-                <div class="col-6" id="rendered-markdown"></div>
-                </div>
-			</div>
+<style>
+    input.no-border{
+        border-color: transparent;
+    }
 
-			<div class="control-group">
-				<label for="posts_content" class="control-label">{%trans _('Type Publish')%}</label>
-				<div class="controls">{%exec Form::select 'posts.post_type_id', sel,'class="control"', NULL, 'Seleccione'%}</div>
-			</div>
-            </fieldset>
-            {%inline '_partial/submit.phtml'%}
-            {%exec Form::close%}
+    input.title{
+        text-align: center;
+        font-size: 200%;
+        font-weight: bold;
+        height: auto;
+    }
+</style>
+<div class="row">
+    <div class="col-10 offset-1">
+        {%exec Form::open%}
+        {%exec Form::select 'posts.post_type_id', sel,'class="control"', NULL, 'Type Publish'%}
+		{%exec Form::text 'posts.title' 'class="control no-border title" placehold="Title"' %}
+        <div id="rendered-markdown"></div>
+		<div class="entry-markdown-content">
+        {%exec Form::textarea 'posts.content' 'class="control entry-markdown"' %}
         </div>
+        {%inline '_partial/submit.phtml'%}
+        {%exec Form::close%}
     </div>
+</div>
 {%endblock%}
 {% block jsblock%}
     {%js 'zepto.min' %}
     {%js 'marked'%}
 <script type="text/javascript">
 'use strict';
-    $(function(){
-        var editor = $('#posts_content'), render = $('#rendered-markdown'), 
-            cb= function(e){
+$(function(){
+    var editor = $('#posts_content'), render = $('#rendered-markdown'),
+        cb = function(){
             var text = editor.val();
             render.html(marked(text));
+            render.css({display: 'block'});
+            editor.css({display: 'none'});
             editor.height(render.height());
-            };
-        editor.on('keyup', cb);
-        $(cb);
+        }
+    ;
+    render.click(function(){
+        editor.css({display: 'block'});
+        render.css({display: 'none'});
+        editor.focus();
     });
+
+    editor.blur(cb);
+    $(cb);
+});
 </script>
 {%endblock%}
 

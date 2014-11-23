@@ -1,17 +1,27 @@
 {%extends  'default.phtml' %}
 {%block content %}
-<div id="posts" class="row">
+<div id="list" class="row">
 	{% inline "_partial/paginator.phtml" %}
 	{% for i in pag %}
-	<div class="post">
-		{% buffer uri %}index/post/{{i.strid}}{% endbuffer %}
-		<h2 class="title">{{i.title}}</h2>
-		{% autoescape off %}
-		{%exec BlogUtil::trucate i.content 500 %}
-		<p><i class="fa fa-calendar-o"></i>{{i.modified_in}} {%exec Html::link uri '<i class="fa fa-book"></i> Leer más' 'class="btn btn-primary"' %} </p>
-		{% endautoescape %}
-		<hr class="clean" />
-	</div>
+	<section class="col-4">
+        <div class="post">
+		<header>
+            {% buffer uri %}index/post/{{i.strid}}{% endbuffer %}
+            <h2 class="t-post">{%exec Html::link uri i.title%}</h2>
+            <div class="info">
+    			<img src="{%exec BlogUtil::image i.content %}" />
+    			<div class="calendar">
+    				<span class="c-day">{{i.modified_in|date_f:'d'}}</span>
+    				<span class="c-year">
+    					<i class="fa fa-calendar-o"></i> {{i.modified_in|date_f:'Y'}}
+    				</span>
+    				{{i.modified_in|date_f:'M'}}
+    			</div>
+            </div>
+		</header>
+		{% autoescape off %}{%exec BlogUtil::trucate i.content 150 %}{% endautoescape %}
+        </div>
+	</section>
 	{%endfor%}
 	
 </div>
