@@ -7,22 +7,26 @@
 {% if canonical %}
 	<link rel="canonical" href="{{canonical}}" />
 {% endif %}
-<title>{{ptitle}} - {{title}}</title>
+<title>{{title}}</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 </head>
 <body>
+    {% block header %}
 	<header class="row" id="top">
-		<h1 id="logo" class="col-6">{{title}}</h1>
-		<h2 id="slogan" class="col-6">{{desc}}</h2>
+		<h1 id="logo" class="col-6">{{pagename}}</h1>
+		<h2 id="slogan" class="col-6">{{pagedesc}}</h2>
 	</header>
+    {% endblock %}
 
-	<div id="menu">{% inline  "_partial/nav.phtml" %}</div>
+    {% block menu %}
+	   <div id="menu">{% inline  "_partial/nav.phtml" %}</div>
+    {% endblock %}
 
-	<divclass="container">
+	<div class="container">
 		<h1>{{ptitle}}</h1>
         <div class="row">
-		    <div class="offset-1 col-10"> {% block content %}{% endblock %}</div>
+		    <div class="col-12">{% block content %}{% endblock %}</div>
         </div>
 	</div>
 
@@ -31,5 +35,6 @@
     	Style by <a href="http://www.styleshout.com/">styleshout</a>|
     	{%exec Html::link 'feed/tl'  '(RSS)' %}</p>
     </footer>
+    {% block jsblock%}{%endblock%}
 </body>
 </html>
