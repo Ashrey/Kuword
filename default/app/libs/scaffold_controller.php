@@ -14,18 +14,14 @@
 /**
  * @see Controller nuevo controller
  */
-class ScaffoldController extends  \KBackend\Libs\ScaffoldController {
+Load::lib('i18n');
+View::template('private');
+class ScaffoldController extends AppController {
 
     public $basetpl = 'admin.phtml';
 
-	final protected function initialize(){
-		Load::lib('i18n');
-		View::template('private');
-	}
 
-	final protected function finalize(){
-		$this->title = Conf::get('title');
-		$this->desc  = Conf::get('desc');
+	protected function after_filter(){
 		$this->menu = Load::model('links')->getDashboardBar();
 	}
 }
