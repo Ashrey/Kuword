@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 {%css "admin" %}
 {%css "basic" %}
 {%css style %}
@@ -8,8 +10,6 @@
 	<link rel="canonical" href="{{canonical}}" />
 {% endif %}
 <title>{{title}}</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 </head>
 <body>
     {% block header %}
@@ -24,16 +24,14 @@
     {% endblock %}
 
 	<div class="container">
-		<h1>{{ptitle}}</h1>
+		{% block titlezone %}<h1>{{ptitle}}</h1>{% endblock %}
         <div class="row">
 		    <div class="col-12">{% block content %}{% endblock %}</div>
         </div>
 	</div>
 
     <footer class="text-center"><p>{{footer}}<br />
-    Powered By <a href="https://github.com/Ashrey/Kuword/">KuWord</a> |
-    	Style by <a href="http://www.styleshout.com/">styleshout</a>|
-    	{%exec Html::link 'feed/tl'  '(RSS)' %}</p>
+    Powered By <a href="https://github.com/Ashrey/Kuword/">KuWord</a></p>
     </footer>
     {% block jsblock%}{%endblock%}
 </body>
