@@ -1,19 +1,18 @@
 /* links */
-a:link, a:visited {background: inherit;text-decoration: none;color: #007E80;font-weight: Bold;}
+a{text-decoration: none;color: #007E80;font-weight: bold;}
 a:hover {background: inherit;color:#299160;text-decoration:underline}
 /* headers */
 h1, h2, h3 {font-family: Verdana, Tahoma, Sans-serif;font-weight: bold;color:#39a170;text-shadow: 0 0 2px #0af;}
 h1 { text-align:center}
 /* images */
-img {border: none;}
 code, pre { margin: 5px 0; padding: 15px 20px; text-align: left;  display: block;  overflow: auto;  font: 500 1em/1.5em monospace ;  white-space: pre;   background: #FAFAFA;  border: 1px solid #f2f2f2;}
 acronym {cursor: help;border-bottom: 1px solid #777;}
 /* blockquote */
 blockquote {margin: .8ex;padding: 10px 10px 10px 35px;border: 1px solid #f2f2f2;background: #FAFAFA url(quote.gif) no-repeat 10px 12px;}
 /* header */
-header#top {background: #39a170;margin:-1px; padding: 1ex;color: #FFF;}
-header#top h1#logo {margin: 0; padding: 0;font: bold 3.5em Arial, Sans-serif;letter-spacing: -1px;color: #FFF;}
-header#top h2#slogan {margin: 0; padding: 0;font: bold 2em Arial, Sans-serif;color: #FFF;}
+header#top {background: #39a170;color: #FFF;}
+header#top h1#logo {font: bold 3.5em Arial, Sans-serif;letter-spacing: -1px;color: #FFF;}
+header#top h2#slogan {font: bold 2em Arial, Sans-serif;color: #FFF;}
 /* menu */
 #menu {clear: both;width:100%;margin: 0;background:#39a170;border-top:1px solid #fff;}
 #menu ul{margin: 0;padding:0}
