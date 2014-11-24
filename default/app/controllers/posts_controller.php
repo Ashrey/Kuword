@@ -10,6 +10,11 @@ class PostsController extends ScaffoldController{
 		$this->ptitle = __('Posts');
 	}
 
+    function create(){
+        $this->sel = PostType::all();
+        parent::create();
+    }
+
     function edit($id){
         $this->sel = PostType::all();
         parent::edit($id);
