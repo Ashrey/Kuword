@@ -1,4 +1,5 @@
 {%extends  'admin.phtml' %}
+{% block titlezone %}{% endblock %}
 {%block content %}
 {%exec Flash::content %}
 <style>
@@ -17,7 +18,7 @@
     <div class="col-10 offset-1">
         {%exec Form::open%}
         {%exec Form::select 'posts.post_type_id', sel,'class="control"', NULL, 'Type Publish'%}
-		{%exec Form::text 'posts.title' 'class="control no-border title" placehold="Title"' %}
+		{%exec Form::text 'posts.title' 'class="control no-border title" placeholder="Title"' %}
         <div id="rendered-markdown"></div>
 		<div class="entry-markdown-content">
         {%exec Form::textarea 'posts.content' 'class="control entry-markdown"' %}
@@ -37,18 +38,34 @@ $(function(){
         cb = function(){
             var text = editor.val();
             render.html(marked(text));
-            render.css({display: 'block'});
-            editor.css({display: 'none'});
-            editor.height(render.height());
+            if(text.trim().length > 0){
+                render.css({display: 'block'});
+                editor.css({display: 'none'});
+                editor.height(render.height() +20 || 20);
+            }
         }
     ;
+
     render.click(function(){
         editor.css({display: 'block'});
         render.css({display: 'none'});
         editor.focus();
     });
 
+    function insertMetachars(sStartTag, sEndTag) {
+    var bDouble = arguments.length > 1, oMsgInput = document.myForm.myTxtArea, nSelStart = oMsgInput.selectionStart, nSelEnd = oMsgInput.selectionEnd, sOldText = oMsgInput.value;
+    oMsgInput.value = sOldText.substring(0, nSelStart) + (bDouble ? sStartTag + sOldText.substring(nSelStart, nSelEnd) + sEndTag : sStartTag) + sOldText.substring(nSelEnd);
+    oMsgInput.setSelectionRange(bDouble || nSelStart === nSelEnd ? nSelStart + sStartTag.length : nSelStart, (bDouble ? nSelEnd : nSelStart) + sStartTag.length);
+    oMsgInput.focus();
+    }
+
     editor.blur(cb);
+
+    editor.keyup(function(){
+        if (this.scrollHeight > this.clientHeight) {
+            this.style.height = this.scrollHeight + "px";
+        }
+    });
     $(cb);
 });
 </script>

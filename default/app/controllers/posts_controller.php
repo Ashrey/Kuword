@@ -7,7 +7,7 @@ class PostsController extends ScaffoldController{
 	public $_model = 'posts';
 	
 	function before_filter(){
-		$this->ptitle = __('Posts');
+		$this->title = __('Posts');
 	}
 
     function create(){

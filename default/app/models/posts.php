@@ -1,8 +1,21 @@
 <?php
+use \KBackend\Libs\Event;
 class Posts extends ActiveRecord {
 
     protected function init(){
         $this->oneToOne('PostType');
+        /*Add create vlaue*/
+        Event::bind('ORMCreate', function($e, $obj){
+            $obj->strid =  BlogUtil::encodeURL($obj->title);
+            $obj->create_at = date('Y-m-d h:i:s');
+            $obj->modified_in = $obj->create_at;
+        }, $this);
+
+        /*Add update value*/
+        Event::bind('ORMUpdate', function($e, $obj){
+            $obj->modified_in = date('Y-m-d h:i:s');
+        }, $this);
+
     }
 	
 	/**
