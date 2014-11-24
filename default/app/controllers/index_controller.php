@@ -11,9 +11,9 @@ class IndexController extends AppController{
 
 	public function index($i_page = 1){
 		$i_page = (int)$i_page;
-		$this->pag = Posts::all($i_page);
-		$this->title= 'Timeline';
-		$this->url = null;
+		$this->pag   = Posts::all($i_page);
+		$this->title = 'Timeline';
+		$this->url   = null;
 	}
 	
 	/**
@@ -24,7 +24,7 @@ class IndexController extends AppController{
 		$o_post = Load::model('posts')->getPostBySlug($slug);
 		if($o_post){
 			$this->post = $o_post;
-			$this->ptitle = $o_post->title;
+			$this->title  = $o_post->title;
 			$p = new Parsedown();
 			$this->text = $p->parse($o_post->content);
 			$this->canonical = PUBLIC_PATH."post/{$o_post->strid}";
