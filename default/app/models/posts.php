@@ -34,7 +34,7 @@ class Posts extends ActiveRecord {
 		    'order' => 'modified_in desc',
 			'where' => 'post_type_id = 1'
 		),
-		$page, 10);		
+		$page, 9);	
 	}
 	
 	function getPostBySlug($slug){
