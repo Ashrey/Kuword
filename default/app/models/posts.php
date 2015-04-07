@@ -29,7 +29,7 @@ class Posts extends ActiveRecord {
         );
     }
 	
-	static function all($page = 1){
+	static function getAll($page = 1){
 		return self::paginate(array(
 		    'order' => 'modified_in desc',
 			'where' => 'post_type_id = 1'
