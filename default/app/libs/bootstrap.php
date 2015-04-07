@@ -5,5 +5,6 @@
 // Arranca KumbiaPHP
 require dirname(dirname(dirname(__DIR__))).'/vendor/autoload.php';
 require dirname(dirname(dirname(__DIR__))).'/backend/app/libs/autoload.php';
+\KBackend\Libs\Config::read('backend');
 require_once CORE_PATH . 'kumbia/bootstrap.php';
 
