@@ -8,17 +8,17 @@
  * @category Kumbia
  * @package Db
  * @subpackage ActiveRecord
- */
-\KBackend\Libs\Config::read('backend');
-Config::read('databases');
-\Kumbia\ActiveRecord\Db::setConfig(array('default' => Config::get('databases.development')));
-class ActiveRecord extends \KBackend\Libs\ARecord{
-    protected static $database = 'default';
+ */ 
+use Kumbia\ActiveRecord\Db;
+\Config::read('databases');
+Db::setConfig(Config::get('databases'));
 
-    public static function getTable()
-    {
-        $class = explode('\\', get_called_class());
-        $name = strtolower(end($class));
-        return "$name";
-    }
+class ActiveRecord extends \KBackend\Libs\ARecord {
+	protected static $database = 'default';
+
+	public static function getTable() {
+		$class = explode('\\', get_called_class());
+		$name = strtolower(end($class));
+		return "$name";
+	}
 }
