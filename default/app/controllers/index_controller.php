@@ -11,7 +11,7 @@ class IndexController extends AppController{
 
 	public function index($i_page = 1){
 		$i_page = (int)$i_page;
-		$this->pag   = Posts::all($i_page);
+		$this->pag   = Posts::getAll($i_page);
 		$this->title = 'Timeline';
 		$this->url   = null;
 	}
