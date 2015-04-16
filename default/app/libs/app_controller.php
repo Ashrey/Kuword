@@ -1,5 +1,8 @@
 <?php
 Load::models('posts');
+function __(){
+	return call_user_func_array(array('I18n', 'get'), func_get_args());
+}
 class AppController extends \KBackend\Libs\ScaffoldController {
 
 	final protected function initialize() {
